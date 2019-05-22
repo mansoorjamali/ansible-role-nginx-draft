@@ -1,0 +1,84 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install common tools
+
+      become: true
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - bind-utils
+        - net-tools
+        - vim
+        - wget
+        - nginx
+        - epel-release
+
+
+    - name: Create a login user
+      user:
+        name: mjamali
+        password: ''
+        groups: # Empty by default, here we give it some groups
+          - wheel
+        state: present
+        shell: /bin/bash       # Defaults to /bin/bash
+        system: no             # Defaults to no
+        createhome: yes        # Defaults to yes
+        home: /home/mjamali  # Defaults to /home/<username>
+
+
+    - name: Test task
+      file:
+        path: "/some/test/path"
+        state: directory
+        owner: mjamali
+        group: wheel
+        mode: 0750
+      become: yes
+
+
+    - name: Set authorized key taken from file
+      authorized_key:
+        user: mjamali
+        state: present
+        key: "{{ lookup('file', '/home/mjamali/.ssh/id_rsa.pub') }}"
+
+
+    - lineinfile:
+        create: yes
+        path: /etc/sudoers.d/mjamali
+        state: present
+        regexp: '^%wheel\s'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        mode: 0440
+        validate: '/usr/sbin/visudo -cf %s'
+
+
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+
+
+    - name: example copying file with owner and permissions
+      copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
+        owner: mjamali
+        group: wheel
+        mode: 0644
+
+
+    - name: Start service nginx, if not started
+      service:
+        name: nginx
+        state: started
+        
+
+    - name: Enable service nginx, and not touch the state
+      service:
+        name: nginx
+        enabled: yes
