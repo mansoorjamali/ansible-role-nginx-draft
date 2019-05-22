@@ -1,3 +1,4 @@
+---
 - sudo: true
   rpm_key:
     key: "{{ nginx_signing_key }}"
