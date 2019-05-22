@@ -21,12 +21,12 @@
       user:
         name: mjamali
         password: ''
-        groups: # Empty by default, here we give it some groups
+        groups: #Empty by default, here we give it some groups
           - wheel
         state: present
         shell: /bin/bash       # Defaults to /bin/bash
-        system: no             # Defaults to no
-        createhome: yes        # Defaults to yes
+        system: false             # Defaults to no
+        createhome: true        # Defaults to yes
         home: /home/mjamali  # Defaults to /home/<username>
 
 
@@ -37,7 +37,7 @@
         owner: mjamali
         group: wheel
         mode: 0750
-      become: yes
+      become: true
 
 
     - name: Set authorized key taken from file
@@ -48,7 +48,7 @@
 
 
     - lineinfile:
-        create: yes
+        create: true
         path: /etc/sudoers.d/mjamali
         state: present
         regexp: '^%wheel\s'
@@ -77,8 +77,7 @@
         name: nginx
         state: started
         
-
     - name: Enable service nginx, and not touch the state
       service:
         name: nginx
-        enabled: yes
+        enabled: true
