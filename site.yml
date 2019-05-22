@@ -21,7 +21,7 @@
       user:
         name: mjamali
         password: ''
-        groups: #Empty by default, here we give it some groups
+        groups:
           - wheel
         state: present
         shell: /bin/bash       # Defaults to /bin/bash
@@ -71,12 +71,11 @@
         group: wheel
         mode: 0644
 
-
     - name: Start service nginx, if not started
       service:
         name: nginx
         state: started
-        
+
     - name: Enable service nginx, and not touch the state
       service:
         name: nginx
