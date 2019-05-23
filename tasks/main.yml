@@ -1,11 +1,11 @@
 ---
-- sudo: true
+- become: true
   rpm_key:
     key: "{{ nginx_signing_key }}"
 
 
 - name: add nginx repository
-  sudo: true
+  become: true
   yum_repository:
     name: nginx
     baseurl: "{{ nginx_base_repository }}"
@@ -13,14 +13,14 @@
     enabled: true
     gpgcheck: true
 
-- sudo: true
+- become: true
   package:
     name: nginx
     state: present
   notify: start nginx
 
 - name: override default home page
-  sudo: true
+  become: true
   copy:
     content: |
       <!DOCTYPE html>

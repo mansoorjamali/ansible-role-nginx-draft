@@ -3,11 +3,12 @@ galaxy_info:
   role_name: nginx draft
   author: Niko Smeds
   description: An ugly nginx role that could use some linting
-
+  license: "license (BSD, MIT)"
   platforms:
-  name: EL
-    versions
-   - 7
+    - name: EL
+      versions:
+        - 6
+        - 7
 
   galaxy_tags:
     - nginx
