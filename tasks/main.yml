@@ -63,6 +63,7 @@
   become: true
   file:
     path: /etc/nginx-exporter
+    path: /etc/systemd/system/nginx_exporter.service
     state: directory
 
 - name: Ensure group "nginx-exp" exists
