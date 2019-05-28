@@ -89,7 +89,7 @@
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
     owner: nginx-exp
-    group: nginx-exip
+    group: nginx-exp
 
 - name: Make sure a service is running
   systemd:
