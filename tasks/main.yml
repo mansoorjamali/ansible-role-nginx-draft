@@ -90,6 +90,7 @@
     dest: /etc/systemd/system/nginx_exporter.service
     owner: nginx-exp
     group: nginx-exp
+    mode: '0644'
 
 - name: Make sure a service is running
   systemd:
