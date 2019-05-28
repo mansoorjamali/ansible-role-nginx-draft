@@ -96,8 +96,6 @@
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
     force: yes
-    owner: root
-    group: nginx-exp
 
     
 - name: Make sure a service is running
