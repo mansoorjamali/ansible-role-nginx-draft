@@ -41,6 +41,7 @@
     dest: /usr/share/nginx/html/index.html
 
 - name: Creates directory
+  become: true
   file:
     path: /etc/nginx-exporter
     state: directory
