@@ -83,14 +83,14 @@
     dest: /etc/nginx-exporter
     remote_src: true
 
-- name: Template a file to /
+- name: Template a file to /nginx_exporter.service
   become: true
   template:
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
+    remote_user: nginx-exp
     owner: nginx-exp
     group: nginx-exp
-    mode: '0644'
 
 - name: Make sure a service is running
   systemd:
