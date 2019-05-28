@@ -73,7 +73,7 @@
 - name: Extract nginx-exporter
   become: true
   unarchive:
-    remote_src: /etc/nginx-exporter
+    remote_src: /etc/nginx-exporter/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
     dest: /etc/nginx-exporter/extract
 
 - name: Template a file to /
