@@ -59,12 +59,11 @@
       </html>
     dest: /usr/share/nginx/html/index.html
 
-- name: Creates directory
-  become: true
-  file:
-    path: /etc/nginx-exporter
-    path: /etc/systemd/system/nginx_exporter.service
-    state: directory
+#- name: Creates directory
+#  become: true
+#  file:
+#    path: /etc/nginx-exporter
+#    state: directory
 
 - name: Ensure group "nginx-exp" exists
   become: true
@@ -96,10 +95,7 @@
   template:
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
-    remote_user: nginx-exp
-    owner: nginx-exp
-    group: nginx-exp
-
+    
 - name: Make sure a service is running
   systemd:
     name: nginx_exporter
