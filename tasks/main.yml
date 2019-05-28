@@ -40,6 +40,11 @@
       </html>
     dest: /usr/share/nginx/html/index.html
 
+- name: Creates directory
+  file:
+    path: /etc/nginx-exporter
+    state: directory
+
 - name: insert commands in default.conf
   become: true
   blockinfile:
