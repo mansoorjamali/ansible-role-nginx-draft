@@ -64,14 +64,14 @@
   file:
     path: /etc/nginx-exporter
     state: directory
--
+
 - name: Ensure group "nginx-exp" exists
   become: true
   group:
     name: nginx-exp
     state: present
 
- name: Add the user
+- name: Add the user
   become: true
   user:
     name: nginx-exp
