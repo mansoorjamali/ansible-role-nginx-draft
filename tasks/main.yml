@@ -90,19 +90,19 @@
     dest: /etc/nginx-exporter
     remote_src: true
 
-#- name: Template a file to /nginx_exporter.service
-#  become: true
-#  template:
-#    src: nginx_exporter.service.j2
-#    dest: /etc/systemd/system/nginx_exporter.service
-#    force: yes
+- name: Template a file to /nginx_exporter.service
+  become: true
+  template:
+    src: nginx_exporter.service.j2
+    dest: /etc/systemd/system/nginx_exporter.service
+    force: yes
 
     
-#- name: Make sure a service is running
-#  systemd:
-#    name: nginx_exporter
-#    state: started
-#    enabled: true
+- name: Make sure a service is running
+  systemd:
+    name: nginx_exporter
+    state: started
+    enabled: true
 
 - name: Check that a page returns a status 200
   uri:
