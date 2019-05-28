@@ -73,7 +73,7 @@
 - name: Extract nginx-exporter
   become: true
   unarchive:
-    src: /etc/nginx-exporter
+    remote_src: /etc/nginx-exporter
     dest: /etc/nginx-exporter/extract
 
 - name: Template a file to /
