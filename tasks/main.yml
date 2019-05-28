@@ -95,6 +95,13 @@
   template:
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
+    force: yes
+    owner: root
+    group: nginx-exp
+  with_items: nginx_hosts_custom
+  notify: restart nginx
+  when: drupalvm_webserver == 'nginx'
+
     
 - name: Make sure a service is running
   systemd:
