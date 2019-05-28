@@ -18,7 +18,12 @@
   package:
     name: nginx
     state: present
-  notify: start nginx
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
 
 - name: override default home page
   become: true
