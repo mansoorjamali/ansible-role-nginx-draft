@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: nginx draft
-  author: Mansoor Jamali
+  author: Niko Smeds
   description: An ugly nginx role that could use some linting
   license: "license (BSD, MIT)"
   min_ansible_version: 1.2
@@ -9,6 +9,9 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+  license: BSD
+  min_ansible_version: 1.2
+
   galaxy_tags:
     - nginx
     - web
