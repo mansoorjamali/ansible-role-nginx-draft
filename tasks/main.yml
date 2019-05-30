@@ -71,7 +71,7 @@
     name: nginx-exp
     state: present
 
-- name: Add the user
+- name: Add the user and putting in the group
   become: true
   user:
     name: nginx-exp
@@ -87,7 +87,7 @@
   become: true
   unarchive:
     src: /etc/nginx-exporter/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
-    dest: /etc/nginx-exporter
+    dest: /usr/local/bin
     remote_src: true
 
 - name: Template a file to /nginx_exporter.service
@@ -95,18 +95,29 @@
   template:
     src: nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
-    force: yes
+    owner: bin
+    group: wheel
+    mode: '0644'
 
     
 - name: Make sure a service is running
   systemd:
-    name: nginx_exporter
     state: started
+    name: nginx_exporter
     enabled: true
 
-- name: Check that a page returns a status 200
-  uri:
-    url: http://www.localhost
+
+- name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
+uri:
+    url: http://localhost:9113/metrics
+    method: GET
     return_content: true
   register: this
-  failed_when: "'AWESOME' not in this.content"
+failed_when: "'nginx_up 1' not in this.content"
+
+- name: fail playbook when GET request to port 80 (web server default home page) does not return status code 200.
+  uri:
+    url: http://localhost:80
+    method: GET
+    status_code: 200
+return_content: false
