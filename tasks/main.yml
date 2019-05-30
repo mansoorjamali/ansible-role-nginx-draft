@@ -81,12 +81,14 @@
   become: true
   get_url:
     url: https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.3.0/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
-    dest: /etc/nginx-exporter
+    dest: $HOME
+    mode: '0440'
+    checksum: sha256:https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.3.0/sha256sums.txt
 
 - name: Extract nginx-exporter
   become: true
   unarchive:
-    src: /etc/nginx-exporter/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
+    src: $HOME/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
     dest: /usr/local/bin
     remote_src: true
 
