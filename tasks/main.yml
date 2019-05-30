@@ -113,11 +113,11 @@
     method: GET
     return_content: true
   register: this
-failed_when: "'nginx_up 1' not in this.content"
+  failed_when: "'nginx_up 1' not in this.content"
 
 - name: fail playbook when GET request to port 80 (web server default home page) does not return status code 200.
   uri:
     url: http://localhost:80
     method: GET
     status_code: 200
-return_content: false
+    return_content: false
