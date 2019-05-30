@@ -108,7 +108,7 @@
 
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
-uri:
+  uri:
     url: http://localhost:9113/metrics
     method: GET
     return_content: true
