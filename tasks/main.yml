@@ -37,7 +37,7 @@
           allow 127.0.0.1;
           deny all;
       }
-- name: start nginx
+- name: restart nginx
   become: true
   service:
     name: nginx
@@ -109,8 +109,8 @@
 - name: Make sure a service is running
   systemd:
     name: nginx_exporter
-    state: started
-    enabled: yes
+    state: restarted
+    enabled: true
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
   uri:
