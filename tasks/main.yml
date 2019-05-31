@@ -109,8 +109,8 @@
 - name: Make sure a service is running
   systemd:
     name: nginx_exporter
-    state: restarted
-    enabled: true
+    state: started
+   # enabled: true
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
   uri:
