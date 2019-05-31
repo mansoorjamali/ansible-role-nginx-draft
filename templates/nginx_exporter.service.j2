@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User={{ nginx-user }}
-Group={{ nginx-group }}
+User={{ nginx_user }}
+Group={{ nginx_group }}
 ExecStart=/usr/local/bin/nginx-prometheus-exporter \
     -nginx.scrape-uri {{ nginx_scrape_uri }}
 SyslogIdentifier=nginx_exporter
