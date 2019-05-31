@@ -65,6 +65,13 @@
     path: /etc/nginx-exporter
     state: directory
 
+- name: Creates directory
+  become: true
+  file:
+    path: /etc/systemd/system/nginx_exporter.service
+    state: directory
+
+
 - name: Ensure group "nginx-exp" exists
   become: true
   group:
@@ -92,20 +99,20 @@
     dest: /usr/local/bin
     remote_src: true
 
-#- name: Template a file to /nginx_exporter.service
-#  become: true
-#  template:
-#    src: /home/mjamali/ansible-role-nginx-draft/templates/nginx_exporter.service.j2
-#    dest: /etc/systemd/system/nginx_exporter.service
-#    owner: nginx-exp
-#    group: nginx-exp
-#    mode: '0644'
+- name: Template a file to /nginx_exporter.service
+  become: true
+  template:
+    src: /home/mjamali/ansible-role-nginx-draft/templates/nginx_exporter.service.j2
+    dest: /etc/systemd/system/nginx_exporter.service
+    owner: nginx-exp
+    group: nginx-exp
+    mode: '0644'
 
-#- name: Make sure a service is running
-#  systemd:
-#    state: started
-#    name: nginx_exporter
-#    enabled: true
+- name: Make sure a service is running
+  systemd:
+    state: started
+    name: nginx_exporter
+    enabled: true
 
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
