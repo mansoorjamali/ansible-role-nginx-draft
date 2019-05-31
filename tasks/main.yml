@@ -105,7 +105,7 @@
   systemd:
     state: started
     name: nginx_exporter
-    enabled: true
+    #enabled: true
 
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
