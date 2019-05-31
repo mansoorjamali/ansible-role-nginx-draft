@@ -97,8 +97,8 @@
   template:
     src: /home/mjamali/ansible-role-nginx-draft/templates/nginx_exporter.service.j2
     dest: /etc/systemd/system/nginx_exporter.service
-    owner: bin
-    group: wheel
+    owner: nginx-exp
+    group: nginx-exp
     mode: '0644'
 
 - name: Make sure a service is running
