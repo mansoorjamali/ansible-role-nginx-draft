@@ -101,7 +101,6 @@
     group: wheel
     mode: '0644'
 
-    
 - name: Make sure a service is running
   systemd:
     state: started
