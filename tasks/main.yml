@@ -94,8 +94,8 @@
   become: true
   unarchive:
     src: $HOME/nginx-prometheus-exporter-0.3.0-linux-amd64.tar.gz
-    dest: /usr/local/bin
     remote_src: true
+    dest: /usr/local/bin/
 
 - name: Template a file to /nginx_exporter.service
   become: true
@@ -109,11 +109,7 @@
 - name: Make sure a service is running
   systemd:
     name: nginx_exporter
-    state: restarted
-
-- name: Make sure a service is running
-  systemd:
-    name: nginx_exporter
+    state: started
     enabled: yes
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
