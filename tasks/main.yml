@@ -99,7 +99,7 @@
     dest: /etc/systemd/system/nginx_exporter.service
     owner: bin
     group: wheel
-    emode: '0644'
+    mode: '0644'
 
 - name: Make sure a service is running
   systemd:
