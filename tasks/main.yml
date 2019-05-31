@@ -102,18 +102,14 @@
     mode: '0644'
 
 - name: Make sure a service is running
-  become: true
   systemd:
-    state: started
     name: nginx_exporter
+    state: started
 
 - name: Make sure a service is running
-  become: true
   systemd:
-    state: started
     name: nginx_exporter
-    enabled: true
-
+    enabled: yes
 
 - name: fail playbook when GET request to port 9113/metrics does not return 'nginx_up 1'
   uri:
